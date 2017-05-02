@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backg"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_avg">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login to Continue in MLC"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="64dp" />
+
+    <EditText
+        android:id="@+id/edit_text_email_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_avg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_login"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/btnGoogle"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/btnGoogle"
+            android:text="Login" />
+
+        <Button
+            android:id="@+id/button_register"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/login_register" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnGoogle"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btnFbLogin"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btnGoogle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_login"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp"
+            android:text="OR"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</LinearLayout>

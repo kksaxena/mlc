@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backg"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="trainedge.multilingualchat.About_UsActivity"
+    tools:showIn="@layout/activity_about__us">
+
+    <TextView
+        android:id="@+id/tvabt"
+        android:layout_width="156dp"
+        android:layout_height="0dp"
+        android:text="About Us"
+        android:textColorHighlight="@android:color/background_dark"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/tvtext"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="23dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintLeft_toLeftOf="@+id/tvtext"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="12dp" />
+
+    <TextView
+        android:id="@+id/tvtext"
+        android:layout_width="0dp"
+        android:layout_height="418dp"
+        android:text="MultiLingualChat is a Multilingual chatting app which means that two user can interact with each other in their own language.  If there is different language in the sender’s phone and different language in the receiver’s phone then the receiver doesn’t have to understand the sender’s language as this app converts the language of the sender’s message to the receiver’s default language.  It also includes group messaging in different- different language individually. "
+        android:textColorHighlight="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="66dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintHorizontal_bias="1.0" />
+</android.support.constraint.ConstraintLayout>
