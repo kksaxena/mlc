@@ -8,50 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:927020325344:android:555b4073c19617d4",
-        "android_client_info": {
-          "package_name": "com.example.user.multilingualchat"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "927020325344-tkn3qdjpf9d5unhsshu0mnclacoighbb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.user.multilingualchat",
-            "certificate_hash": "d3322558642869517a0f9464f013aa7c49acfe2a"
-          }
-        },
-        {
-          "client_id": "927020325344-fvj5t12pdtmgj8c6702hs89b063rcq55.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDrUqb1nThu8DN2WlDSqOdNxX2sDcomrhI"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "927020325344-fvj5t12pdtmgj8c6702hs89b063rcq55.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:927020325344:android:5f5fb6ad0f216956",
         "android_client_info": {
           "package_name": "trainedge.multilingualchat"

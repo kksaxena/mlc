@@ -1,6 +1,7 @@
 package trainedge.multilingualchat.fragments;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,8 @@ import trainedge.multilingualchat.events.PushNotificationEvent;
 import trainedge.multilingualchat.models.Chat;
 import trainedge.multilingualchat.utils.Constants;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class ChatFragment extends Fragment implements ChatContract.View, TextView.OnEditorActionListener {
     private RecyclerView mRecyclerViewChat;
@@ -39,6 +42,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
     private ChatRecyclerAdapter mChatRecyclerAdapter;
 
     private ChatPresenter mChatPresenter;
+    private SharedPreferences app_pref;
 
     public static ChatFragment newInstance(String receiver,
                                            String receiverUid,
@@ -50,6 +54,12 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
         ChatFragment fragment = new ChatFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -69,6 +79,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_chat, container, false);
         bindViews(fragmentView);
+        app_pref = fragmentView.getContext().getSharedPreferences("app_pref", MODE_PRIVATE);
         return fragmentView;
     }
 
@@ -107,6 +118,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
 
     private void sendMessage() {
         String message = mETxtMessage.getText().toString();
+        message=convertMsg(mETxtMessage,message);
         String receiver = getArguments().getString(Constants.ARG_RECEIVER);
         String receiverUid = getArguments().getString(Constants.ARG_RECEIVER_UID);
         String sender = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -121,6 +133,11 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
         mChatPresenter.sendMessage(getActivity().getApplicationContext(),
                 chat,
                 receiverFirebaseToken);
+    }
+
+    private String convertMsg(EditText view, String message) {
+
+        return null;
     }
 
     @Override
