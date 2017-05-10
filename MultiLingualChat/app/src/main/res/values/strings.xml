@@ -37,6 +37,48 @@
     <string name="logout">Logout</string>
     <string name="are_you_sure">Are you sure ?</string>
     <string name="cancel">Cancel</string>
-
+    <string-array name="lang_list">
+        <item>ARABIC("ar")</item>
+        <item>BULGARIAN("bg")</item>
+        <item>CATALAN("ca")</item>
+        <item>CHINESE_SIMPLIFIED("zh-CHS")</item>
+        <item>CHINESE_TRADITIONAL("zh-CHT")</item>
+        <item>CZECH("cs")</item>
+        <item>DANISH("da")</item>
+        <item>DUTCH("nl")</item>
+        <item>ENGLISH("en")</item>
+        <item>ESTONIAN("et")</item>
+        <item>FINNISH("fi")</item>
+        <item>FRENCH("fr")</item>
+        <item>GERMAN("de")</item>
+        <item>GREEK("el")</item>
+        <item>HAITIAN_CREOLE("ht")</item>
+        <item>HEBREW("he")</item>
+        <item>HINDI("hi")</item>
+        <item>HMONG_DAW("mww")</item>
+        <item>HUNGARIAN("hu")</item>
+        <item>INDONESIAN("id")</item>
+        <item>ITALIAN("it")</item>
+        <item>JAPANESE("ja")</item>
+        <item>KOREAN("ko")</item>
+        <item>LATVIAN("lv")</item>
+        <item>LITHUANIAN("lt")</item>
+        <item>MALAY("ms")</item>
+        <item>NORWEGIAN("no")</item>
+        <item>PERSIAN("fa")</item>
+        <item>POLISH("pl")</item>
+        <item>PORTUGUESE("pt")</item>
+        <item>ROMANIAN("ro")</item>
+        <item>RUSSIAN("ru")</item>
+        <item>SLOVAK("sk")</item>
+        <item>SLOVENIAN("sl")</item>
+        <item>SPANISH("es")</item>
+        <item>SWEDISH("sv")</item>
+        <item>THAI("th")</item>
+        <item>TURKISH("tr")</item>
+        <item>UKRAINIAN("uk")</item>
+        <item>URDU("ur")</item>
+        <item>VIETNAMESE("vi")</item>
+    </string-array>
 
 </resources>

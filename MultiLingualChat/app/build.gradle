@@ -56,6 +56,9 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'org.greenrobot:eventbus:3.0.0'
 
+    // https://mvnrepository.com/artifact/com.memetix/microsoft-translator-java-api
+    compile group: 'com.memetix', name: 'microsoft-translator-java-api', version: '0.6.2'
+
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

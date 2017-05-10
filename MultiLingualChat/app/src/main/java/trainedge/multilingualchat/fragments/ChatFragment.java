@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.memetix.mst.language.Language;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -118,7 +119,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
 
     private void sendMessage() {
         String message = mETxtMessage.getText().toString();
-        message=convertMsg(mETxtMessage,message);
+
         String receiver = getArguments().getString(Constants.ARG_RECEIVER);
         String receiverUid = getArguments().getString(Constants.ARG_RECEIVER_UID);
         String sender = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -135,10 +136,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
                 receiverFirebaseToken);
     }
 
-    private String convertMsg(EditText view, String message) {
 
-        return null;
-    }
 
     @Override
     public void onSendMessageSuccess() {
@@ -154,7 +152,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
     @Override
     public void onGetMessagesSuccess(Chat chat) {
         if (mChatRecyclerAdapter == null) {
-            mChatRecyclerAdapter = new ChatRecyclerAdapter(new ArrayList<Chat>());
+            mChatRecyclerAdapter = new ChatRecyclerAdapter(new ArrayList<Chat>(),app_pref.getString("language", "english"));
             mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
         }
         mChatRecyclerAdapter.add(chat);

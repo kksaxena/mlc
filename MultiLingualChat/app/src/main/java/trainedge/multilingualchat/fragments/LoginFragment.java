@@ -110,11 +110,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(getContext())
-                .enableAutoManage(getActivity(), this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        try {
+            mGoogleApiClient = new GoogleApiClient.Builder(getContext())
+                    .enableAutoManage(getActivity(), this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
 
+        } catch (Exception e) {
+
+        }
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -205,7 +209,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Log
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-                Toast.makeText(getContext(), result.getStatus()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), result.getStatus() + "", Toast.LENGTH_SHORT).show();
             }
         }
 

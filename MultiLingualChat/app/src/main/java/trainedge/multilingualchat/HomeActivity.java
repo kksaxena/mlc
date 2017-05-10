@@ -1,6 +1,5 @@
 package trainedge.multilingualchat;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,13 +17,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.memetix.mst.language.Language;
 
-import trainedge.multilingualchat.R;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,40 +41,29 @@ public class HomeActivity extends AppCompatActivity
 
         app_pref = getSharedPreferences("app_pref", MODE_PRIVATE);
         boolean language_selection = app_pref.getBoolean("language_selection", false);
+
         if (!language_selection) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            // Get the layout inflater
-            LayoutInflater inflater = this.getLayoutInflater();
+            builder.setCancelable(false);
 
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            final View view = inflater.inflate(R.layout.dialog_lang, null);
-            builder.setView(view)
-                    // Add action buttons
-                    .setPositiveButton(R.string.Save, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            String language = ((EditText) view.findViewById(R.id.etLanguage)).getText().toString();
-                            saveUserPref(language);
+            try {
+                final Language[] list =Language.values();
+                ArrayAdapter adapter = new ArrayAdapter<>(HomeActivity.this, android.R.layout.simple_list_item_1, list);
 
-                        }
-                    })
-                    .setNegativeButton(R.string.Cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        app_pref.edit().putString("language", String.valueOf(list[which])).apply();
+                        app_pref.edit().putBoolean("language_selection", true).apply();
+                    }
+                });
+                builder.create().show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-                        }
-                    });
-            builder.create().show();
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,8 +77,8 @@ public class HomeActivity extends AppCompatActivity
 
     private void saveUserPref(String language) {
         SharedPreferences.Editor edit = app_pref.edit();
-        edit.putBoolean("language_selection",true);
-        edit.putString("language",language);
+        edit.putBoolean("language_selection", true);
+        edit.putString("language", language);
         edit.apply();
     }
 
@@ -146,8 +134,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
 
         }
 
@@ -160,51 +147,34 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera)
-        {
+        if (id == R.id.nav_camera) {
             // Handle the camera action
-        }
-        else if (id == R.id.nav_gallery)
-        {
+        } else if (id == R.id.nav_gallery) {
 
-        }
-        else if (id == R.id.nav_chat)
-        {
-            Intent objch=new Intent(HomeActivity.this,UserListingActivity.class);
+        } else if (id == R.id.nav_chat) {
+            Intent objch = new Intent(HomeActivity.this, UserListingActivity.class);
             startActivity(objch);
-        }
-        else if (id == R.id.nav_contacts)
-        {
+        } else if (id == R.id.nav_contacts) {
             Intent contactIntent = new Intent(this, AllContact.class);
             startActivity(contactIntent);
-        }
-        else if (id == R.id.nav_manage)
-        {
+        } else if (id == R.id.nav_manage) {
             Intent objs = new Intent(HomeActivity.this, SettingActivity.class);
             startActivity(objs);
             return true;
-        }
-        else if (id == R.id.nav_logout)
-        {
+        } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent objl = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(objl);
             finish();
 
-        }
-        else if (id == R.id.nav_share)
-        {
+        } else if (id == R.id.nav_share) {
             sendInvitation();
-        }
-        else if (id == R.id.nav_about)
-        {
+        } else if (id == R.id.nav_about) {
             Intent objau = new Intent(HomeActivity.this, About_UsActivity.class);
             startActivity(objau);
-            
-        }
-        else if (id == R.id.nav_feedback)
-        {
-           Intent objf = new Intent(HomeActivity.this,Feedback.class);
+
+        } else if (id == R.id.nav_feedback) {
+            Intent objf = new Intent(HomeActivity.this, Feedback.class);
             startActivity(objf);
         }
 

@@ -8,9 +8,11 @@ import trainedge.multilingualchat.fragments.UsersFragment;
 
 
 public class UserListingPagerAdapter extends FragmentPagerAdapter {
-    private static final Fragment[] sFragments = new Fragment[]{/*UsersFragment.newInstance(UsersFragment.TYPE_CHATS),*/
+    private static final Fragment[] sFragments = new Fragment[]{
+            /*UsersFragment.newInstance(UsersFragment.TYPE_CHATS),*/
             UsersFragment.newInstance(UsersFragment.TYPE_ALL)};
-    private static final String[] sTitles = new String[]{/*"Chats",*/
+    private static final String[] sTitles = new String[]
+            {/*"Chats",*/
             "All Users"};
 
     public UserListingPagerAdapter(FragmentManager fm) {
