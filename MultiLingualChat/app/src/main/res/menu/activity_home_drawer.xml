@@ -4,26 +4,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+
         <item
             android:id="@+id/nav_chat"
             android:icon="@android:drawable/sym_action_chat"
             android:title="Chat" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_contacts"
-            android:icon="@drawable/ic_action_person"
-            android:title="Contacts" />
+        
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" ></item>
+            android:title="Settings" ></item>
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_exit_to_app_black_24dp"

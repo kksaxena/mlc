@@ -6,15 +6,22 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.memetix.mst.language.Language;
-import com.memetix.mst.translate.Translate;
 
+
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
 import java.util.List;
 
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.HttpStatus;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.methods.HttpGet;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.util.EntityUtils;
 import trainedge.multilingualchat.R;
 import trainedge.multilingualchat.models.Chat;
 
@@ -78,8 +85,12 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final String alphabet = chat.sender.substring(0, 1);
         class bgStuff extends AsyncTask<String, Void, String> {
 
-            String translatedText = "";
+            private String translatedText = "";
 
+            @Override
+            protected void onPreExecute() {
+                otherChatViewHolder.txtChatMessage.setText("translating...");
+            }
 
             @Override
             protected String doInBackground(String... params) {
@@ -97,6 +108,26 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 otherChatViewHolder.txtUserAlphabet.setText(alphabet);
             }
 
+            /** Translate a given text between a source and a destination language */
+            public String translate(String text) {
+                String translated = null;
+                try {
+                    String query = URLEncoder.encode(text, "UTF-8");
+                    String langpair = URLEncoder.encode("en" + "|" + language, "UTF-8");
+                    String url = "http://mymemory.translated.net/api/get?q=" + query + "&langpair=" + langpair;
+                    HttpClient hc = new DefaultHttpClient();
+                    HttpGet hg = new HttpGet(url);
+                    HttpResponse hr = hc.execute(hg);
+                    if (hr.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                        JSONObject response = new JSONObject(EntityUtils.toString(hr.getEntity()));
+                        translated = response.getJSONObject("responseData").getString("translatedText");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return translated;
+            }
+
         }
 
         new bgStuff().execute(chat.message);
@@ -104,7 +135,7 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
 
-    public String translate(String text) throws Exception {
+   /* public String translate(String text) throws Exception {
         // Set the Client ID / Client Secret once per JVM. It is set statically and applies to all services
         Translate.setClientId("zaid");
         Translate.setClientSecret("ea86bbbbb7c34f1f859e8425d1ed32ca");
@@ -116,7 +147,7 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         translatedText = Translate.execute(text, Language.fromString(language));
 
         return translatedText;
-    }
+    }*/
 
     @Override
     public int getItemCount() {

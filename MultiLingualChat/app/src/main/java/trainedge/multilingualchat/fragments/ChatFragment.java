@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.memetix.mst.language.Language;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,6 +31,7 @@ import trainedge.multilingualchat.models.Chat;
 import trainedge.multilingualchat.utils.Constants;
 
 import static android.content.Context.MODE_PRIVATE;
+import static trainedge.multilingualchat.SettingActivity.LANGUAGE;
 
 
 public class ChatFragment extends Fragment implements ChatContract.View, TextView.OnEditorActionListener {
@@ -137,7 +137,6 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
     }
 
 
-
     @Override
     public void onSendMessageSuccess() {
         mETxtMessage.setText("");
@@ -152,7 +151,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
     @Override
     public void onGetMessagesSuccess(Chat chat) {
         if (mChatRecyclerAdapter == null) {
-            mChatRecyclerAdapter = new ChatRecyclerAdapter(new ArrayList<Chat>(),app_pref.getString("language", "english"));
+            mChatRecyclerAdapter = new ChatRecyclerAdapter(new ArrayList<Chat>(), app_pref.getString(LANGUAGE, "fr"));
             mRecyclerViewChat.setAdapter(mChatRecyclerAdapter);
         }
         mChatRecyclerAdapter.add(chat);

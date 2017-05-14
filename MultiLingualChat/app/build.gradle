@@ -57,7 +57,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
 
     // https://mvnrepository.com/artifact/com.memetix/microsoft-translator-java-api
-    compile group: 'com.memetix', name: 'microsoft-translator-java-api', version: '0.6.2'
+    /*compile group: 'com.memetix', name: 'microsoft-translator-java-api', version: '0.6.2'*/
+    compile "cz.msebera.android:httpclient:4.4.1.2"
 
     testCompile 'junit:junit:4.12'
 }

@@ -2,6 +2,7 @@ package trainedge.multilingualchat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,12 @@ import android.support.v7.widget.Toolbar;
 import trainedge.multilingualchat.fragments.ChatFragment;
 import trainedge.multilingualchat.utils.Constants;
 
+import static trainedge.multilingualchat.SettingActivity.THEME;
+
 
 public class ChatActivity extends AppCompatActivity {
     private Toolbar mToolbar;
+    private SharedPreferences app_pref;
 
     public static void startActivity(Context context,
                                      String receiver,
@@ -28,6 +32,14 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app_pref = getSharedPreferences("app_pref", MODE_PRIVATE);
+        String theme = app_pref.getString(THEME, "light");
+        if (theme.equals("dark")) {
+            setTheme(R.style.AppThemeDark);
+        } else if (theme.equals("Black")) {
+            setTheme(R.style.AppTheme);
+        }
+
         setContentView(R.layout.activity_chat);
         bindViews();
         init();

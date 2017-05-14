@@ -1,69 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backg"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="trainedge.multilingualchat.SettingActivity"
     tools:showIn="@layout/activity_setting">
 
-    <EditText
-        android:id="@+id/etDefEmail"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/view_selectLang"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email Here"
-        android:inputType="textEmailAddress"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/switchWifiOp"
-        android:layout_marginTop="60dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/switchWifiOp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Switch
-        android:id="@+id/switchWifiOp"
-        android:layout_width="0dp"
-        android:layout_height="37dp"
-        android:text="Wi-Fi"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/switchCloudSyncOp"
-        app:layout_constraintRight_toRightOf="@+id/switchCloudSyncOp"
-        android:layout_marginTop="31dp"
-        app:layout_constraintTop_toBottomOf="@+id/etDefEmail"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintLeft_toLeftOf="@+id/switchCloudSyncOp" />
+        <TextView
 
-    <Switch
-        android:id="@+id/switchCloudSyncOp"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="193dp"
-        android:text="Cloud Sync"
-        app:layout_constraintLeft_toLeftOf="@+id/btnClearSettings"
-        app:layout_constraintRight_toRightOf="@+id/btnClearSettings"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1000"
+            android:text="Language"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-    <Button
-        android:id="@+id/btnClearSettings"
-        android:layout_width="221dp"
-        android:layout_height="48dp"
-        android:text="Clear Settings"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="26dp"
-        app:layout_constraintTop_toBottomOf="@+id/switchCloudSyncOp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="44dp" />
+        <TextView
+            android:id="@+id/tvSelectedLang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gibberish"
+            android:textStyle="bold" />
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_changeTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1000"
+            android:text="Theme"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <TextView
+            android:id="@+id/tvSelectedtheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="light"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#1000"
+            android:text="Notification"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <Switch
+            android:id="@+id/switchNotification"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:textOff="Disabled"
+            android:textOn="enabled(beta)"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -32,9 +32,19 @@ public class AllContactsAdapter extends RecyclerView.Adapter<AllContactsAdapter.
 
     @Override
     public void onBindViewHolder(ContactViewHolder holder, int position) {
-        ContactVO contactVO = contactVOList.get(position);
+        final ContactVO contactVO = contactVOList.get(position);
         holder.tvContactName.setText(contactVO.getContactName());
         holder.tvPhoneNumber.setText(contactVO.getContactNumber());
+        holder.tvContactName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendInviteLink(contactVO);
+            }
+        });
+    }
+
+    private void sendInviteLink(ContactVO contactVO) {
+
     }
 
     @Override

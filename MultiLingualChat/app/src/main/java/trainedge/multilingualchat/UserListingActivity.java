@@ -31,7 +31,7 @@ public class UserListingActivity extends AppCompatActivity implements LogoutCont
     }
 
     public static void startActivity(Context context, int flags) {
-        Intent intent = new Intent(context, UserListingActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(flags);
         context.startActivity(intent);
     }

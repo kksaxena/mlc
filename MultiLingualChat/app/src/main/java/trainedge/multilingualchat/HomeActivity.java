@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,17 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.memetix.mst.language.Language;
 
-import java.util.List;
+
+import static trainedge.multilingualchat.SettingActivity.IS_SELECTED;
+import static trainedge.multilingualchat.SettingActivity.LANGUAGE;
+import static trainedge.multilingualchat.SettingActivity.THEME;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     public static final int REQUEST_INVITE = 232;
     public static final String TAG = "HomeActivity";
     private SharedPreferences app_pref;
@@ -35,33 +36,22 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app_pref = getSharedPreferences("app_pref", MODE_PRIVATE);
+        String theme = app_pref.getString(THEME, "light");
+        if (theme.equals("dark")) {
+            setTheme(R.style.AppThemeDark);
+        } else if (theme.equals("Black")) {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        app_pref = getSharedPreferences("app_pref", MODE_PRIVATE);
         boolean language_selection = app_pref.getBoolean("language_selection", false);
 
         if (!language_selection) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(false);
 
-            try {
-                final Language[] list =Language.values();
-                ArrayAdapter adapter = new ArrayAdapter<>(HomeActivity.this, android.R.layout.simple_list_item_1, list);
-
-                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        app_pref.edit().putString("language", String.valueOf(list[which])).apply();
-                        app_pref.edit().putBoolean("language_selection", true).apply();
-                    }
-                });
-                builder.create().show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            showLanguageSelectionDialog();
         }
 
 
@@ -73,14 +63,54 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FloatingActionButton fab= (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
     }
 
-    private void saveUserPref(String language) {
-        SharedPreferences.Editor edit = app_pref.edit();
-        edit.putBoolean("language_selection", true);
-        edit.putString("language", language);
-        edit.apply();
+    private void showLanguageSelectionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+
+        try {
+            final String[] list = {
+                    "en",
+                    "fr",
+                    "ru",
+                    "de",
+                    "hi",
+                    "gu",
+                    "bn-IN",
+                    "zn-HK",
+                    "br"
+            };
+            final String[] listReadable = {
+                    "english",
+                    "french",
+                    "russian",
+                    "dutch",
+                    "hindi",
+                    "gujrati",
+                    "bengali",
+                    "chinese",
+                    "brazil"
+            };
+            ArrayAdapter adapter = new ArrayAdapter<String>(HomeActivity.this, android.R.layout.simple_list_item_1, listReadable);
+
+            builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    app_pref.edit().putString(LANGUAGE, String.valueOf(list[which])).apply();
+                    app_pref.edit().putBoolean(IS_SELECTED, true).apply();
+                }
+            });
+            builder.create().show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     private void sendInvitation() {
         Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
@@ -141,22 +171,16 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_chat) {
+        if (id == R.id.nav_chat) {
             Intent objch = new Intent(HomeActivity.this, UserListingActivity.class);
             startActivity(objch);
-        } else if (id == R.id.nav_contacts) {
-            Intent contactIntent = new Intent(this, AllContact.class);
-            startActivity(contactIntent);
+
         } else if (id == R.id.nav_manage) {
             Intent objs = new Intent(HomeActivity.this, SettingActivity.class);
             startActivity(objs);
@@ -181,5 +205,11 @@ public class HomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent objch = new Intent(HomeActivity.this, UserListingActivity.class);
+        startActivity(objch);
     }
 }
