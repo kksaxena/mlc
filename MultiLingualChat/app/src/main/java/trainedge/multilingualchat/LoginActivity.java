@@ -15,12 +15,14 @@ public class LoginActivity extends AppCompatActivity {
     public static void startIntent(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
+
     }
 
     public static void startIntent(Context context, int flags) {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(flags);
         context.startActivity(intent);
+
     }
 
     @Override

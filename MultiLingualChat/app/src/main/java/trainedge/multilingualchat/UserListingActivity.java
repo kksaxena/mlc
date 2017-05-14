@@ -75,21 +75,7 @@ public class UserListingActivity extends AppCompatActivity implements LogoutCont
         mLogoutPresenter = new LogoutPresenter(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_user_listing, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_logout:
-                logout();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void logout() {
         new AlertDialog.Builder(this)

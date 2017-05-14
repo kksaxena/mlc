@@ -37,12 +37,6 @@ public class SettingActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app_pref = getSharedPreferences("app_pref", MODE_PRIVATE);
-        String theme = app_pref.getString(THEME, "light");
-        if (theme.equals("dark")) {
-            setTheme(R.style.AppThemeDark);
-        } else{
-            setTheme(R.style.AppTheme);
-        }
 
         setContentView(R.layout.activity_setting);
         bindViews();
