@@ -95,7 +95,7 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             @Override
             protected String doInBackground(String... params) {
                 try {
-                    translatedText = translate(params[0]);
+                    translatedText = translate(params[0], params[1]);
                 } catch (Exception e) {
                     translatedText = params[0];
                 }
@@ -109,11 +109,14 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
             /** Translate a given text between a source and a destination language */
-            public String translate(String text) {
+            public String translate(String text, String sendLang) {
                 String translated = null;
+                if (sendLang.equals(language)) {
+                    return text;
+                }
                 try {
                     String query = URLEncoder.encode(text, "UTF-8");
-                    String langpair = URLEncoder.encode("en" + "|" + language, "UTF-8");
+                    String langpair = URLEncoder.encode(sendLang + "|" + language, "UTF-8");
                     String url = "http://mymemory.translated.net/api/get?q=" + query + "&langpair=" + langpair;
                     HttpClient hc = new DefaultHttpClient();
                     HttpGet hg = new HttpGet(url);
@@ -130,7 +133,7 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         }
 
-        new bgStuff().execute(chat.message);
+        new bgStuff().execute(chat.message, chat.lang);
 
     }
 

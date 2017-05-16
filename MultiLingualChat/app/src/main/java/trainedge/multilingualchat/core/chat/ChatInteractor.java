@@ -127,7 +127,7 @@ public class ChatInteractor implements ChatContract.Interactor {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            mOnGetMessagesListener.onGetMessagesFailure("Unable to get message: " + databaseError.getMessage());
+                           // mOnGetMessagesListener.onGetMessagesFailure("Unable to get message: " + databaseError.getMessage());
                         }
                     });
                 } else if (dataSnapshot.hasChild(room_type_2)) {

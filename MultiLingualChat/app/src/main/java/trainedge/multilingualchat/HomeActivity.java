@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FloatingActionButton fab= (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
     }
 
@@ -111,7 +111,6 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-
     private void sendInvitation() {
         Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
                 .setMessage(getString(R.string.invitation_message))
@@ -145,7 +144,7 @@ public class HomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-           // super.onBackPressed();
+            // super.onBackPressed();
             finish();
         }
     }
@@ -188,6 +187,7 @@ public class HomeActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
+            app_pref.edit().clear().apply();
             Intent objl = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(objl);
             finish();

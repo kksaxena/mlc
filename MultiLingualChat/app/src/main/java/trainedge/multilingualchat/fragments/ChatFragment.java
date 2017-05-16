@@ -130,7 +130,8 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
                 senderUid,
                 receiverUid,
                 message,
-                System.currentTimeMillis());
+                System.currentTimeMillis(),
+                app_pref.getString(LANGUAGE, "fr"));
         mChatPresenter.sendMessage(getActivity().getApplicationContext(),
                 chat,
                 receiverFirebaseToken);
@@ -160,7 +161,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
 
     @Override
     public void onGetMessagesFailure(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Subscribe
